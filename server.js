@@ -4,9 +4,9 @@ import { bugService } from './services/bug.service.js';
 import { loggerService } from './services/logger.service.js';
 
 const app = express();
+app.use(express.static('public'));
 
 app.get('/', (req, res) => res.send('Hello there me'));
-
 app.get('/api/bug/save', (req, res) => {
 	const { id: _id, title, description, severity } = req.query;
 	const bug = { _id, title, description, severity: +severity };
@@ -20,7 +20,12 @@ app.get('/api/bug/save', (req, res) => {
 });
 
 app.get('/api/bug', (req, res) => {
-	bugService.query().then((bugs) => res.send(bugs));
+	//console.log(req.query);
+	const filterBy = {
+		txt: req.query.txt,
+		minSeverity: +req.query.minSeverity,
+	};
+	bugService.query(filterBy).then((bugs) => res.send(bugs));
 });
 app.get('/api/bug/:id', (req, res) => {
 	const bugId = req.params.id;

@@ -8,8 +8,20 @@ export const bugService = {
 };
 
 var bugs = readJsonFile('./data/bugs.json');
-function query() {
-	return Promise.resolve(bugs);
+function query(filterBy = {}) {
+	var filteredBugs = bugs;
+	if (filterBy.txt) {
+		const regExp = new RegExp(filterBy.txt, 'i');
+		filteredBugs = filteredBugs.filter((bug) => regExp.test(bug.title));
+	}
+
+	if (filterBy.minSeverity) {
+		filteredBugs = filteredBugs.filter(
+			(bug) => bug.severity >= filterBy.minSeverity
+		);
+	}
+
+	return Promise.resolve(filteredBugs);
 }
 
 function remove(bugId) {
