@@ -8,8 +8,9 @@ export const bugService = {
 };
 
 var bugs = readJsonFile('./data/bugs.json');
-function query(filterBy = {}) {
-	var filteredBugs = bugs;
+function query({ filterBy, sortBy, pagination }) {
+	var filteredBugs = [...bugs];
+	// const { filterBy, sortBy, pagination } = queryOptions;
 	if (filterBy.txt) {
 		const regExp = new RegExp(filterBy.txt, 'i');
 		filteredBugs = filteredBugs.filter((bug) => regExp.test(bug.title));
@@ -19,6 +20,30 @@ function query(filterBy = {}) {
 		filteredBugs = filteredBugs.filter(
 			(bug) => bug.severity >= filterBy.minSeverity
 		);
+	}
+
+	if (filterBy.labels && filterBy.labels.length > 0) {
+		filteredBugs = filteredBugs.filter((bug) =>
+			filterBy.labels.some((label) => bug?.labels?.includes(label))
+		);
+	}
+
+	if (sortBy.sortField === 'severity' || sortBy.sortField === 'CreatedAt') {
+		const { sortField } = sortBy;
+		filteredBugs.sort(
+			(bug1, bug2) => (bug1[sortField] - bug2[sortField]) * sortBy.sortDir
+		);
+	} else if (sortBy.sortField === 'title') {
+		filteredBugs.sort(
+			(bug1, bug2) => bug1.title.localeCompare(bug2.title) * sortBy.sortDir
+		);
+	}
+
+	if (pagination.pageIdx !== undefined) {
+		const { pageIdx, pageSize } = pagination;
+
+		const startIdx = pageIdx * pageSize;
+		filteredBugs = filteredBugs.slice(startIdx, startIdx + pageSize);
 	}
 
 	return Promise.resolve(filteredBugs);
@@ -40,7 +65,7 @@ function save(bug) {
 	} else {
 		bug._id = makeId();
 		bug.createdAt = Date.now();
-		bugs.push(bug);
+		bugs.unshift(bug);
 	}
 
 	return _saveBugs().then(() => bug);

@@ -56,9 +56,10 @@ export function BugIndex() {
 				const bugsToUpdate = bugs.map((currBug) =>
 					currBug._id === savedBug._id ? savedBug : currBug
 				);
-
+				console.log(bugsToUpdate);
 				setBugs(bugsToUpdate);
 				showSuccessMsg('Bug updated');
+				loadBugs();
 			})
 			.catch((err) => showErrorMsg('Cannot update bug', err));
 	}
