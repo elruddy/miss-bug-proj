@@ -1,7 +1,7 @@
 import { utilService } from './util.service.js';
 import { storageService } from './async-storage.service.js';
 
-const BASE_URL = 'api/bug/';
+const BASE_URL = '/api/bug/';
 const STORAGE_KEY = 'bugs';
 
 _createBugs();
@@ -12,6 +12,7 @@ export const bugService = {
 	save,
 	remove,
 	getDefaultFilter,
+	getEmptyBug,
 	getLabels,
 };
 
@@ -40,6 +41,7 @@ function save(bug) {
 	// return axios.get(BASE_URL + queryStr).then((res) => res.data);
 	const method = bug._id ? 'put' : 'post';
 	const bugId = bug._id || '';
+
 	return axios[method](BASE_URL + bugId, bug).then((res) => res.data);
 }
 
@@ -78,4 +80,8 @@ function getDefaultFilter() {
 
 function getLabels() {
 	return ['back', 'front', 'critical', 'fixed', 'in progress', 'stuck'];
+}
+
+function getEmptyBug(title = '', description = '', severity = 0) {
+	return { title, description, severity };
 }

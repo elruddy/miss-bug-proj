@@ -1,5 +1,5 @@
 const { useState, useEffect } = React;
-
+const { Link, useSearchParams } = ReactRouterDOM;
 import { bugService } from '../services/bug.service.remote.js';
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js';
 
@@ -15,7 +15,10 @@ export function BugIndex() {
 	function loadBugs() {
 		bugService
 			.query(filterBy)
-			.then(setBugs)
+			.then((bugs) => {
+				console.log(bugs);
+				setBugs(bugs);
+			})
 			.catch((err) => showErrorMsg(`Couldn't load bugs - ${err}`));
 	}
 
@@ -30,39 +33,39 @@ export function BugIndex() {
 			.catch((err) => showErrorMsg(`Cannot remove bug`, err));
 	}
 
-	function onAddBug() {
-		const bug = {
-			title: prompt('Bug title?', 'Bug ' + Date.now()),
-			severity: +prompt('Bug severity?', 3),
-			description: prompt('Bug description?', 'Dangerous bug'),
-		};
+	// function onAddBug() {
+	// 	const bug = {
+	// 		title: prompt('Bug title?', 'Bug ' + Date.now()),
+	// 		severity: +prompt('Bug severity?', 3),
+	// 		description: prompt('Bug description?', 'Dangerous bug'),
+	// 	};
 
-		bugService
-			.save(bug)
-			.then((savedBug) => {
-				setBugs([...bugs, savedBug]);
-				showSuccessMsg('Bug added');
-			})
-			.catch((err) => showErrorMsg(`Cannot add bug`, err));
-	}
+	// 	bugService
+	// 		.save(bug)
+	// 		.then((savedBug) => {
+	// 			setBugs([...bugs, savedBug]);
+	// 			showSuccessMsg('Bug added');
+	// 		})
+	// 		.catch((err) => showErrorMsg(`Cannot add bug`, err));
+	// }
 
-	function onEditBug(bug) {
-		const severity = +prompt('New severity?', bug.severity);
-		const bugToSave = { ...bug, severity };
+	// function onEditBug(bug) {
+	// 	const severity = +prompt('New severity?', bug.severity);
+	// 	const bugToSave = { ...bug, severity };
+	// 	//console.log(bugToSave);
 
-		bugService
-			.save(bugToSave)
-			.then((savedBug) => {
-				const bugsToUpdate = bugs.map((currBug) =>
-					currBug._id === savedBug._id ? savedBug : currBug
-				);
-				console.log(bugsToUpdate);
-				setBugs(bugsToUpdate);
-				showSuccessMsg('Bug updated');
-				loadBugs();
-			})
-			.catch((err) => showErrorMsg('Cannot update bug', err));
-	}
+	// 	bugService
+	// 		.save(bugToSave)
+	// 		.then((savedBug) => {
+	// 			const bugsToUpdate = bugs.map((currBug) =>
+	// 				currBug._id === savedBug._id ? savedBug : currBug
+	// 			);
+	// 			//console.log(bugs);
+	// 			setBugs(bugsToUpdate);
+	// 			showSuccessMsg('Bug updated');
+	// 		})
+	// 		.catch((err) => showErrorMsg('Cannot update bug', err));
+	// }
 
 	function onSetFilterBy(filterBy) {
 		setFilterBy((prevFilter) => ({ ...prevFilter, ...filterBy }));
@@ -70,13 +73,13 @@ export function BugIndex() {
 
 	return (
 		<section className="bug-index main-content">
-			<BugFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
-			<header>
-				<h3>Bug List</h3>
-				<button onClick={onAddBug}>Add Bug</button>
-			</header>
+			<button>
+				<Link to="/bug/edit">Add Bug</Link>
+			</button>
 
-			<BugList bugs={bugs} onRemoveBug={onRemoveBug} onEditBug={onEditBug} />
+			<BugFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
+
+			<BugList bugs={bugs} onRemoveBug={onRemoveBug} />
 		</section>
 	);
 }

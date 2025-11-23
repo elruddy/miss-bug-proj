@@ -1,9 +1,17 @@
 const { Link } = ReactRouterDOM;
 
 import { BugPreview } from './BugPreview.jsx';
+import { authService } from '../services/auth.service.js';
 
-export function BugList({ bugs, onRemoveBug, onEditBug }) {
+export function BugList({ bugs, onRemoveBug }) {
 	if (!bugs) return <div>Loading...</div>;
+
+	function isAuthorized(bug) {
+		const user = authService.getLoggedinUser();
+		if (!user) return false;
+		return user.isAdmin || user._id === bug.creator._id;
+	}
+
 	return (
 		<ul className="bug-list">
 			{bugs.map((bug) => (
@@ -13,8 +21,14 @@ export function BugList({ bugs, onRemoveBug, onEditBug }) {
 						<button>
 							<Link to={`/bug/${bug._id}`}>Details</Link>
 						</button>
-						<button onClick={() => onEditBug(bug)}>Edit</button>
-						<button onClick={() => onRemoveBug(bug._id)}>x</button>
+						{isAuthorized(bug) && (
+							<React.Fragment>
+								<button onClick={() => onRemoveBug(bug._id)}>Remove</button>
+								<button>
+									<Link to={`/bug/edit/${bug._id}`}>Edit</Link>
+								</button>
+							</React.Fragment>
+						)}
 					</section>
 				</li>
 			))}

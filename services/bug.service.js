@@ -49,26 +49,35 @@ function query({ filterBy, sortBy, pagination }) {
 	return Promise.resolve(filteredBugs);
 }
 
-function remove(bugId) {
+function remove(bugId, loggedInUser) {
 	const idx = bugs.findIndex((bug) => bug._id === bugId);
 	if (idx === -1) return Promise.reject('Bug not found!');
-
+	if (!loggedInUser.isAdmin && bugToUpdate.creator._id !== loggedInUser._id) {
+		return Promise.reject('Not Your Bug');
+	}
 	bugs.splice(idx, 1);
-	return _saveBugs();
+	return _saveBugsToFile();
 }
 
-function save(bug) {
+function save(bug, loggedInUser) {
 	if (bug._id) {
-		const idx = bugs.findIndex((b) => b._id === bug_id);
-		if (idx === -1) return Promise.reject('Bug not found!');
-		bugs[idx] = { ...bugs[idx], ...bug };
+		const bugToUpdate = bugs.findIndex((b) => b._id === bug._id);
+		if (!loggedInUser.isAdmin && bugToUpdate.creator._id !== loggedInUser._id) {
+			return Promise.reject('Not Your Bug');
+		}
+		bugToUpdate.title = bug.title;
+		bugToUpdate.severity = bug.severity;
 	} else {
 		bug._id = makeId();
 		bug.createdAt = Date.now();
+		bug.creator = {
+			_id: loggedInUser._id,
+			fullname: loggedInUser.fullname,
+		};
 		bugs.unshift(bug);
 	}
 
-	return _saveBugs().then(() => bug);
+	return _saveBugsToFile().then(() => bug);
 }
 
 function getById(bugId) {
@@ -77,6 +86,20 @@ function getById(bugId) {
 	return Promise.resolve(bug);
 }
 
-function _saveBugs() {
-	return writeJsonFile('./data/bugs.json', bugs);
+// function _saveBugs() {
+// 	return writeJsonFile('./data/bugs.json', bugs);
+// }
+
+function _saveBugsToFile() {
+	return new Promise((resolve, reject) => {
+		const data = JSON.stringify(bugs, null, 2);
+		fs.writeFile('data/bug.json', data, (err) => {
+			if (err) {
+				loggerService.error('Cannot write to bugs file', err);
+				return reject(err);
+			}
+			console.log('The file was saved!');
+			resolve();
+		});
+	});
 }
