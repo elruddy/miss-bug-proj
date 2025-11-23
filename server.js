@@ -145,7 +145,7 @@ app.post('/api/bug', (req, res) => {
 		return res.status(400).send('Missing mandatory fields');
 
 	bugService
-		.save(bug)
+		.save(bug, loggedinUser)
 		.then((savedBug) => {
 			res.send(savedBug);
 		})
@@ -173,7 +173,7 @@ app.put('/api/bug/:id', (req, res) => {
 		creator,
 	};
 	bugService
-		.save(bug)
+		.save(bug, loggedinUser)
 		.then((savedBug) => {
 			res.send(savedBug);
 		})
@@ -189,7 +189,7 @@ app.delete('/api/bug/:bugId', (req, res) => {
 
 	const { bugId } = req.params;
 	bugService
-		.remove(bugId)
+		.remove(bugId, loggedinUser)
 		.then(() => {
 			loggerService.info(`Bug ${bugId} was removed`);
 			res.status(204).send('Removed');

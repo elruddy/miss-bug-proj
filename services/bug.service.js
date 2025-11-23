@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 import { readJsonFile, writeJsonFile, makeId } from './util.service.js';
 import { loggerService } from './logger.service.js';
 export const bugService = {
@@ -52,7 +54,7 @@ function query({ filterBy, sortBy, pagination }) {
 function remove(bugId, loggedInUser) {
 	const idx = bugs.findIndex((bug) => bug._id === bugId);
 	if (idx === -1) return Promise.reject('Bug not found!');
-	if (!loggedInUser.isAdmin && bugToUpdate.creator._id !== loggedInUser._id) {
+	if (!loggedInUser.isAdmin && bugs[idx].creator._id !== loggedInUser._id) {
 		return Promise.reject('Not Your Bug');
 	}
 	bugs.splice(idx, 1);
@@ -60,8 +62,12 @@ function remove(bugId, loggedInUser) {
 }
 
 function save(bug, loggedInUser) {
+	//console.log('user', loggedInUser);
+
 	if (bug._id) {
-		const bugToUpdate = bugs.findIndex((b) => b._id === bug._id);
+		const bugToUpdate = bugs.find((b) => b._id === bug._id);
+		//console.log('bug toupdate', bugToUpdate);
+
 		if (!loggedInUser.isAdmin && bugToUpdate.creator._id !== loggedInUser._id) {
 			return Promise.reject('Not Your Bug');
 		}
