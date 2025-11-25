@@ -55,7 +55,7 @@ export function BugEdit() {
 		setBugToEdit((prevBug) => ({ ...prevBug, [field]: value }));
 	}
 
-	const { title, severity } = bugToEdit;
+	const { title, severity, description } = bugToEdit;
 	return (
 		<section className="bug-edit">
 			<h1>{bugId ? 'Edit' : 'Add'} Bug</h1>
@@ -76,6 +76,15 @@ export function BugEdit() {
 					type="number"
 					name="severity"
 					id="severity"
+				/>
+
+				<label htmlFor="description">Description</label>
+				<input
+					onChange={handleChange}
+					value={description}
+					type="text"
+					name="description"
+					id="description"
 				/>
 
 				<button>Save</button>

@@ -51,6 +51,8 @@ export function LoginSignup({ setLoggedinUser }) {
 			});
 	}
 
+	console.log(isSignup);
+
 	return (
 		<div className="login-page">
 			<form className="login-form" onSubmit={handleSubmit}>
@@ -84,7 +86,12 @@ export function LoginSignup({ setLoggedinUser }) {
 			</form>
 
 			<div className="btns">
-				<a href="#" onClick={() => setIsSignUp(!isSignup)}>
+				<a
+					href="#/auth"
+					onClick={() => {
+						setIsSignUp(!isSignup);
+					}}
+				>
 					{isSignup ? 'Already a member? Login' : 'New user? Signup here'}
 				</a>
 			</div>

@@ -62,7 +62,8 @@ function remove(bugId, loggedInUser) {
 }
 
 function save(bug, loggedInUser) {
-	//console.log('user', loggedInUser);
+	console.log('user', loggedInUser);
+	//console.log('bug', bug);
 
 	if (bug._id) {
 		const bugToUpdate = bugs.find((b) => b._id === bug._id);
@@ -80,6 +81,8 @@ function save(bug, loggedInUser) {
 			_id: loggedInUser._id,
 			fullname: loggedInUser.fullname,
 		};
+		//console.log('bugs', bugs);
+
 		bugs.unshift(bug);
 	}
 
@@ -99,7 +102,7 @@ function getById(bugId) {
 function _saveBugsToFile() {
 	return new Promise((resolve, reject) => {
 		const data = JSON.stringify(bugs, null, 2);
-		fs.writeFile('data/bug.json', data, (err) => {
+		fs.writeFile('data/bugs.json', data, (err) => {
 			if (err) {
 				loggerService.error('Cannot write to bugs file', err);
 				return reject(err);

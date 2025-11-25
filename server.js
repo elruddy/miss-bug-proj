@@ -73,7 +73,7 @@ app.post('/api/auth/signup', (req, res) => {
 });
 
 //API BUG
-app.get('/', (req, res) => res.send('Hello there me'));
+// app.get('/', (req, res) => res.send('Hello there me'));
 
 // app.get('/api/bug/save', (req, res) => {
 // 	console.log(req.query);
@@ -89,15 +89,20 @@ app.get('/', (req, res) => res.send('Hello there me'));
 // });
 
 app.get('/api/bug', (req, res) => {
-	//console.log(req.query);
+	// console.log(req.query);
 	// const filterBy = {
 	// 	txt: req.query.txt || '',
 	// 	minSeverity: +req.query.minSeverity || 0,
 	// };
 	// bugService.query(filterBy).then((bugs) => res.send(bugs));
 
-	const loggedinUser = authService.validateToken(req.cookies.loginToken);
-	if (!loggedinUser) return res.status(401).send('Cannot add bug');
+	const loginToken = req.cookies.loginToken;
+	console.log(authService);
+	// BLOCKING THE SERVER
+	//const loggedinUser = authService.validateToken(loginToken);
+	//console.log('loggedinUser', loggedinUser);
+
+	//if (!loggedinUser) return res.status(401).send('Cannot add bug');
 
 	const queryOptions = parseQueryParams(req.query);
 	bugService
@@ -133,7 +138,7 @@ app.post('/api/bug', (req, res) => {
 	const loggedinUser = authService.validateToken(req.cookies.loginToken);
 	if (!loggedinUser) return res.status(401).send('Cannot add bug');
 
-	console.log(req.body);
+	console.log('after loggedUser', req.body);
 	const bug = {
 		title: req.body.title,
 		description: req.body.description || '',
@@ -141,7 +146,7 @@ app.post('/api/bug', (req, res) => {
 		labels: req.body.lables || [],
 	};
 
-	if (!bug.title || bug.severity === undefined)
+	if (!bug.title || !bug.severity)
 		return res.status(400).send('Missing mandatory fields');
 
 	bugService
@@ -159,7 +164,6 @@ app.put('/api/bug/:id', (req, res) => {
 	const loggedinUser = authService.validateToken(req.cookies.loginToken);
 	if (!loggedinUser) return res.status(401).send('Cannot update bug');
 
-	console.log(req.body);
 	const { title, description, severity, labels, _id, creator } = req.body;
 	if (!_id || !title || severity === undefined)
 		return res.status(400).send('Missing mandatory fields');
@@ -198,6 +202,10 @@ app.delete('/api/bug/:bugId', (req, res) => {
 			loggerService.error('Cannot get bug', err);
 			res.status(404).send('Cannot get bug');
 		});
+});
+
+app.get('/*all', (req, res) => {
+	res.sendFile(path.resolve('public/index.html'));
 });
 
 app.listen(3030, () => loggerService.info('Server ready at port 3030'));

@@ -1,121 +1,248 @@
 [
-	{
-		"title": "liu",
-		"description": "Dangerous bug",
-		"severity": 2,
-		"labels": [],
-		"_id": "3QMda",
-		"createdAt": 1763744823272,
-		"creator": {
-			"_id": "GOtHH",
-			"fullname": "Bobby Bob"
-		}
-	},
-	{
-		"title": "gxy",
-		"description": "Dangerous bug",
-		"severity": 3,
-		"labels": [],
-		"_id": "FHHzP",
-		"createdAt": 1763214003595,
-		"creator": {
-			"_id": "2XtHv",
-			"fullname": "Lala Shuli"
-		}
-	},
-	{
-		"_id": "abc123",
-		"title": "Cannot save a new car",
-		"description": "problem when clicking Save",
-		"severity": 3,
-		"createdAt": 1542107359454,
-		"creator": {
-			"_id": "u111",
-			"fullname": "Puki Ja"
-		}
-	},
-	{
-		"_id": "YuDOh",
-		"title": "blabla",
-		"severity": 5,
-		"createdAt": 1762619680931,
-		"creator": {
-			"_id": "u111",
-			"fullname": "Puki Ja"
-		}
-	},
-	{
-		"_id": "Its3i",
-		"title": "blalbalal",
-		"severity": 5,
-		"createdAt": 1762627371172,
-		"creator": {
-			"_id": "u102",
-			"fullname": "Nina Simantov"
-		}
-	},
-	{
-		"_id": "6Mbg4",
-		"title": "bugs bunny ",
-		"severity": 4,
-		"createdAt": 1762628088444,
-		"creator": {
-			"_id": "GOtHH",
-			"fullname": "Bobby Bob"
-		}
-	},
-	{
-		"_id": "Z0SxJ",
-		"title": "Cannot ",
-		"severity": 5,
-		"createdAt": 1762628931983,
-		"creator": {
-			"_id": "u102",
-			"fullname": "Nina Simantov"
-		}
-	},
-	{
-		"_id": "74ivl",
-		"title": "bugs bunny ",
-		"description": "undefined",
-		"severity": 3,
-		"createdAt": 1762630301961,
-		"creator": {
-			"_id": "u102",
-			"fullname": "Nina Simantov"
-		}
-	},
-	{
-		"_id": "8GBPT",
-		"title": "blabla",
-		"description": "undefined",
-		"severity": 4,
-		"createdAt": 1762788016515,
-		"creator": {
-			"_id": "2XtHv",
-			"fullname": "Lala Shuli"
-		}
-	},
-	{
-		"_id": "9hbej",
-		"title": "blabla",
-		"description": "undefined",
-		"severity": 4,
-		"createdAt": 1762788799354,
-		"creator": {
-			"_id": "GOtHH",
-			"fullname": "Bobby Bob"
-		}
-	},
-	{
-		"_id": "BUI4D",
-		"title": "Cannot save a new car",
-		"description": "problem when clicking Save",
-		"severity": 4,
-		"createdAt": 1762788976259,
-		"creator": {
-			"_id": "6iykr",
-			"fullname": "Kiki Ki"
-		}
-	}
+  {
+    "title": "vn",
+    "description": "hzfh",
+    "severity": 1,
+    "labels": [
+      "critical",
+      "fixed"
+    ],
+    "_id": "BMDvX",
+    "createdAt": 1764009393217,
+    "creator": {
+      "_id": "GOtHH",
+      "fullname": "Bobby Bob"
+    }
+  },
+  {
+    "title": "boobys bug",
+    "description": "was . the port each time each time The sky . this happened as generally . the story the story . to a pleasure was the port in such cases the color of television from various people ",
+    "severity": 1,
+    "labels": [
+      "fixed",
+      "back"
+    ],
+    "_id": "WG3ZI",
+    "createdAt": 1764003702721,
+    "creator": {
+      "_id": "GOtHH",
+      "fullname": "Bobby Bob"
+    }
+  },
+  {
+    "title": "sbhetH",
+    "description": "Lorem ipsum dolor",
+    "severity": 3,
+    "labels": [
+      "fixed",
+      "front"
+    ],
+    "_id": "Uz4cQ",
+    "createdAt": 1764003385213,
+    "creator": {
+      "_id": "GOtHH",
+      "fullname": "Bobby Bob"
+    }
+  },
+  {
+    "title": "asd",
+    "description": "Lorem ipsum dolor",
+    "severity": 2,
+    "labels": [
+      "in progress"
+    ],
+    "_id": "5y0aM",
+    "createdAt": 1764000746211,
+    "creator": {
+      "_id": "2XtHv",
+      "fullname": "Lala Shuli"
+    }
+  },
+  {
+    "title": "sdc",
+    "description": "Lorem ipsum dolorIKEWFBEOW",
+    "severity": 2,
+    "labels": [
+      "stuck"
+    ],
+    "_id": "wu0Ue",
+    "createdAt": 1764000690409,
+    "creator": {
+      "_id": "2XtHv",
+      "fullname": "Lala Shuli"
+    }
+  },
+  {
+    "title": "asv",
+    "description": "svhdcvgolrfaegpenhpirraj",
+    "severity": 4,
+    "labels": [
+      "fixed"
+    ],
+    "_id": "lraDt",
+    "createdAt": 1763999026770,
+    "creator": {
+      "_id": "2XtHv",
+      "fullname": "Lala Shuli"
+    }
+  },
+  {
+    "title": "bla",
+    "description": "jysjdtukutksjysr5kys",
+    "severity": 4,
+    "labels": [
+      "critical",
+      "in progress"
+    ],
+    "_id": "B4XbF",
+    "createdAt": 1763998926403,
+    "creator": {
+      "_id": "2XtHv",
+      "fullname": "Lala Shuli"
+    }
+  },
+  {
+    "title": "liu",
+    "description": "Dangerous bug",
+    "severity": 3,
+    "labels": [
+      "critical",
+      "stuck"
+    ],
+    "_id": "3QMda",
+    "createdAt": 1763744823272,
+    "creator": {
+      "_id": "GOtHH",
+      "fullname": "Bobby Bob"
+    }
+  },
+  {
+    "title": "gxy",
+    "description": "Dangerous bug",
+    "severity": 3,
+    "labels": [
+      "back",
+      "stuck"
+    ],
+    "_id": "FHHzP",
+    "createdAt": 1763214003595,
+    "creator": {
+      "_id": "2XtHv",
+      "fullname": "Lala Shuli"
+    }
+  },
+  {
+    "_id": "abc123",
+    "title": "Cannot save a new car",
+    "description": "problem when clicking Save",
+    "severity": 3,
+    "labels": [
+      "back",
+      "stuck"
+    ],
+    "createdAt": 1542107359454,
+    "creator": {
+      "_id": "u111",
+      "fullname": "Puki Ja"
+    }
+  },
+  {
+    "_id": "YuDOh",
+    "title": "blabla",
+    "description": "Dangerous bug",
+    "severity": 5,
+    "labels": [
+      "back",
+      "stuck"
+    ],
+    "createdAt": 1762619680931,
+    "creator": {
+      "_id": "u111",
+      "fullname": "Puki Ja"
+    }
+  },
+  {
+    "_id": "Its3i",
+    "title": "blalbalal",
+    "description": "Dangerous bugfmhmtu,yi",
+    "severity": 5,
+    "createdAt": 1762627371172,
+    "creator": {
+      "_id": "u102",
+      "fullname": "Nina Simantov"
+    }
+  },
+  {
+    "_id": "6Mbg4",
+    "title": "bugs bunny ",
+    "description": "Dangerous bugbfeatnyktukl",
+    "severity": 4,
+    "labels": [
+      "critical",
+      "in progress"
+    ],
+    "createdAt": 1762628088444,
+    "creator": {
+      "_id": "GOtHH",
+      "fullname": "Bobby Bob"
+    }
+  },
+  {
+    "_id": "Z0SxJ",
+    "title": "Cannot ",
+    "description": "Dangerous cannot bugbfeatnyktukl",
+    "severity": 5,
+    "labels": [
+      "in progress"
+    ],
+    "createdAt": 1762628931983,
+    "creator": {
+      "_id": "u102",
+      "fullname": "Nina Simantov"
+    }
+  },
+  {
+    "_id": "74ivl",
+    "title": "bugs bunny ",
+    "description": "bugs bunny buabfuwgorw",
+    "severity": 3,
+    "labels": [
+      "critical",
+      "in progress"
+    ],
+    "createdAt": 1762630301961,
+    "creator": {
+      "_id": "u102",
+      "fullname": "Nina Simantov"
+    }
+  },
+  {
+    "_id": "9hbej",
+    "title": "blabla",
+    "description": "undefetnjyrkw5k6ul7rined",
+    "severity": 4,
+    "labels": [
+      "critical",
+      "in progress"
+    ],
+    "createdAt": 1762788799354,
+    "creator": {
+      "_id": "GOtHH",
+      "fullname": "Bobby Bob"
+    }
+  },
+  {
+    "_id": "BUI4D",
+    "title": "Cannot save a new car",
+    "description": "problem when clicking Save",
+    "severity": 4,
+    "labels": [
+      "in progress"
+    ],
+    "createdAt": 1762788976259,
+    "creator": {
+      "_id": "6iykr",
+      "fullname": "Kiki Ki"
+    }
+  }
 ]
